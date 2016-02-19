@@ -34,6 +34,7 @@ namespace ConsoleApplication1
  
             Console.WriteLine("ahoj");
             Console.ReadLine();
+            
             Auta mojeauto = new Auta();
             mojeauto.nastavRokVyroby(2000);
             mojeauto.nastavSpotrebu(6);
