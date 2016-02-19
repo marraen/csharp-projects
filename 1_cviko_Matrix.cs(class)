@@ -19,7 +19,7 @@ namespace ConsoleApplication1
         {
             return matice.GetLength(0);
         }
-         public int pocetSloupcu()
+        public int pocetSloupcu()
         {
             return matice.GetLength(1);
         }
@@ -65,8 +65,99 @@ namespace ConsoleApplication1
         
         }
     
-    
+    }
+
+
+        static public Matrix operator -(Matrix a1, Matrix a2)
+    {
+        if (a1.pocetSloupcu() == a2.pocetSloupcu() && a1.pocetRadku() == a2.pocetRadku())
+        {
+            double [,] novePole = new double[a1.pocetRadku(), a1.pocetSloupcu()];
+
+            for (int i=0; i<a1.pocetRadku(); i++)
+            {
+                for (int k = 0; k<a1.pocetSloupcu(); k++)
+                {
+                novePole[i,k]=a1.matice[i,k] - a2.matice[i, k];
+                
+                
+                }
+          
+            
+            }
+            return new Matrix(novePole);
+
+        }
+        else
+        {
+            throw new Exception("Nesouhlasi rozmer"); 
+        
+        
+        }
     
     }
+
+        public static Matrix operator *(Matrix a, Matrix b)
+        {
+            if (a.pocetSloupcu() != b.pocetRadku())
+            {
+                throw new Exception("Nesouhlasi rozmer");
+            }
+
+            double[,] resultMatrix = new double[a.pocetRadku(), a.pocetSloupcu()];
+
+              for (int rowIndex = 0; rowIndex < a.pocetRadku(); rowIndex++)
+              {
+                  for (int columnIndex = 0; columnIndex < b.pocetSloupcu(); columnIndex++)
+                  {
+                      double sum =0;
+                      for (int sumIndex = 0; sumIndex < a.pocetSloupcu(); sumIndex++)
+                      {
+                        sum += a.matice[rowIndex,sumIndex]*b.matice[sumIndex, columnIndex];
+                      }
+                      resultMatrix[rowIndex, columnIndex] = sum;
+                  }
+
+
+              }
+                  return new Matrix(resultMatrix);
+            
+        
+            
+       }
+        
+        
+        
+        
+        
+    
+
+
+        public double determinant ()
+        {
+            if (pocetRadku() == pocetSloupcu() && 1 == pocetSloupcu())
+            {
+                return matice[0, 0];
+            }
+
+            if (pocetRadku() == pocetSloupcu() && 2 == pocetSloupcu())
+            {
+                double determinant = ((matice[0, 0] * matice[1, 1]) - (matice[0, 1] * matice[1, 0]));
+                return determinant;
+            
+            }
+
+            if (pocetRadku() == pocetSloupcu() && 3 == pocetSloupcu())
+            {
+                double determinant = ((matice[0, 0] * matice[1, 1] * matice[2, 2] + matice[1, 0] * matice[2, 1] * matice[0, 2] + matice[2, 0] * matice[0, 1] * matice[1, 2]) - (matice[0, 2] * matice[1, 1] * matice[2, 0] + matice[1, 2] * matice[2, 1] * matice[0, 0] + matice[2, 2] * matice[0, 1] * matice[1, 0]));
+                return determinant;
+            }
+            else
+                Console.WriteLine("ehm...");
+                return 0;
+        }
+    
+    
+   
     }
 }
