@@ -29,7 +29,7 @@ namespace ConsoleApplication1
         }
         public override string ToString()
         {
-            return base.ToString();
+            //return base.ToString();
             string vypis;
             vypis = "Rok vyroby: " + rokVyroby + "Spotreba: " + spotreba;
             return vypis;
