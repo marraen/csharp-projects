@@ -41,6 +41,7 @@ namespace ConsoleApplication1
 
             Console.WriteLine("Rok vyroby: " + mojeauto.ziskejRokVyroby());
 
+            Console.WriteLine(mojeauto.ToString())
  
             Console.WriteLine("ahoj");
             Console.ReadLine();
