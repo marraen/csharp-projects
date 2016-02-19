@@ -11,6 +11,7 @@ namespace ConsoleApplication1
         private int rokVyroby;
         private int spotreba;
 
+   //     public Auta(rokVyroby, spotreba);
         public void nastavRokVyroby(int _rokVyroby)
         {
             if (_rokVyroby > 1990)
@@ -26,6 +27,12 @@ namespace ConsoleApplication1
         {
             return rokVyroby;   
         }
-
+        public override string ToString()
+        {
+            return base.ToString();
+            string vypis;
+            vypis = "Rok vyroby: " + rokVyroby + "Spotreba: " + spotreba;
+            return vypis;
+        }
     }
 }
