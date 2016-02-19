@@ -11,29 +11,41 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             double[,] A = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            double[,] AA = { { 11, 12, 13 }, { 24, 25, 26 }, { 37, 38, 39 } };
             double[,] B = { { 1, 2 }, { 4, 5 }, { 7, 8 } };
             Matrix A1 = new Matrix(A);
             Matrix A2 = new Matrix(A);
+            Matrix A3 = new Matrix(AA);
 
             try
             {
                 Matrix B1 = A1 + A2;
                 Console.WriteLine(B1);
-
-
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);          
             }
+
                 Console.WriteLine(A1.ToString());
+
+           try
+           {
+               Matrix B2 = A3 - A1;
+               Console.WriteLine(B2);
+           }
+           catch (Exception e)
+           {
+               Console.WriteLine(e.Message);
+           }
+
+                Console.WriteLine(A1.ToString());
+
+
+       Console.WriteLine(A1.determinant());
             
-            
-            
-            
-    /*        
-            
+           
+/*            
          int cislo;
             cislo = 5;
 
@@ -54,10 +66,10 @@ namespace ConsoleApplication1
 
 
             }
-            int[]
+            
             Auta mojeauto = new Auta();
-            // mojeauto.nastavRokVyroby(2000);
-            // mojeauto.nastavSpotrebu(6);
+            mojeauto.nastavRokVyroby(2000);
+            mojeauto.nastavSpotrebu(6);
 
             Console.WriteLine("Rok vyroby: " + mojeauto.ziskejRokVyroby());
 
