@@ -8,21 +8,33 @@ namespace ConsoleApplication1
 {
     class Program
     {
-            double[,] A = {{ 1, 2, 3 },{4,5,6}, {7, 8, 9}};
-            Matrix A1 = new Matrix(A);
-    /*
         static void Main(string[] args)
         {
-        
-            double[,] A = {{ 1,2,3},{4,5,6},{7,8,9}};
+            double[,] A = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            double[,] B = { { 1, 2 }, { 4, 5 }, { 7, 8 } };
             Matrix A1 = new Matrix(A);
+            Matrix A2 = new Matrix(A);
 
-            Console.WriteLine(A1.ToString());
+            try
+            {
+                Matrix B1 = A1 + A2;
+                Console.WriteLine(B1);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);          
+            }
+                Console.WriteLine(A1.ToString());
             
             
             
             
-            int cislo;
+    /*        
+            
+         int cislo;
             cislo = 5;
 
             Console.WriteLine(cislo);
@@ -42,21 +54,17 @@ namespace ConsoleApplication1
 
 
             }
-
- 
-            Console.WriteLine("ahoj");
-            Console.ReadLine();
-            
+            int[]
             Auta mojeauto = new Auta();
-            mojeauto.nastavRokVyroby(2000);
-            mojeauto.nastavSpotrebu(6);
+            // mojeauto.nastavRokVyroby(2000);
+            // mojeauto.nastavSpotrebu(6);
 
             Console.WriteLine("Rok vyroby: " + mojeauto.ziskejRokVyroby());
 
-            Console.WriteLine(mojeauto.ToString())
+            Console.WriteLine(mojeauto.ToString());
  
             Console.WriteLine("ahoj");
-            */
+*/
             Console.ReadLine();
         }
     }
