@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Auta
+    {
+        private int rokVyroby;
+        private int spotreba;
+
+        public void nastavRokVyroby(int _rokVyroby)
+        {
+            if (_rokVyroby > 1990)
+                rokVyroby = _rokVyroby;
+        }
+
+        public void nastavSpotrebu(int _spotreba)
+        {
+            spotreba = _spotreba;
+        }
+
+        public int ziskejRokVyroby()
+        {
+            return rokVyroby;   
+        }
+
+    }
+}
