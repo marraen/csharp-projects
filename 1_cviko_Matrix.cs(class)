@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace ConsoleApplication1
 {
     class Matrix
@@ -31,5 +37,36 @@ namespace ConsoleApplication1
             }
             return retezec;
         }
+
+        static public Matrix operator +(Matrix a1, Matrix a2)
+    {
+        if (a1.pocetSloupcu() == a2.pocetSloupcu() && a1.pocetRadku() == a2.pocetRadku())
+        {
+            double [,] novePole = new double[a1.pocetRadku(), a1.pocetSloupcu()];
+
+            for (int i=0; i<a1.pocetRadku(); i++)
+            {
+                for (int k = 0; k<a1.pocetSloupcu(); k++)
+                {
+                novePole[i,k]=a1.matice[i,k] + a2.matice[i, k];
+                
+                
+                }
+          
+            
+            }
+            return new Matrix(novePole);
+
+        }
+        else
+        {
+            throw new Exception("Nesouhlasi rozmer"); 
+        
+        
+        }
+    
+    
+    
+    }
     }
 }
