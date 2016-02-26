@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace @string
+{
+           /* 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string mujRetezec;
+            mujRetezec = "muj retezec";
+            char znak = 'A';
+
+            System.String mujRetezec2 = "muj retezec dva";  //ekvivalentni zavedeni stringu
+
+            Console.WriteLine(string.Compare(mujRetezec, mujRetezec2));
+            string novyRetezec = mujRetezec.Replace("muj", "tvuj");
+            Console.WriteLine(novyRetezec);
+            Console.WriteLine("--------------------------");
+            Console.WriteLine(mujRetezec.ToUpper());
+            Console.WriteLine(mujRetezec.IndexOf("retezec", 0));
+            
+            Console.WriteLine("--------------------------");
+            string[] podretezec = mujRetezec2.Split(new char[]{' ','.','!'}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string iterator in podretezec)
+            { 
+                 Console.WriteLine(iterator);
+            }
+            Console.WriteLine("--------------------------");
+
+            ///
+
+            int cislo = 50;
+            int cislo2 = 100;
+
+            double cislo3 = 10.5555555;
+            string formatRet = string.Format("Hodnota cislo: {0,-10} \nHodnota cislo2: {1,-10}", cislo, cislo2);
+
+           // string formatRet2 = string.Format("{0,-10, F2}",cislo3);       dodělat...? E2, D2
+            Console.WriteLine(formatRet);
+            Console.WriteLine("--------------------------");
+
+            Console.WriteLine(mujRetezec);
+            
+            Console.ReadLine();
+        }
+    }
+ */
+
+    class StringStatistics
+    {
+        static void Main(string[] args)
+        {
+        string testovaciText = "Toto je retezec predstavovany nekolika radky,\n" + "ktere jsou od sebe oddeleny znakem LF (Line Feed).\n" + "Je tu i nejaky ten vykricnik! Pro ucely testovani i otaznik?\n" + "Toto je jen zkratka zkr. ale ne konec vety. A toto je\n" + "posledni veta!";
+        Console.WriteLine(testovaciText);
+
+
+        int words = 1;
+        string[] podretezec = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!'}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string iterator in podretezec)
+            {
+                words++;
+            }
+        Console.WriteLine(words);
+
+        int lines = 0;
+        string[] podretezec2 = testovaciText.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string iterator in podretezec2)
+            {
+                 lines++;
+            }
+        Console.WriteLine(lines);
+
+        int sentences = 0;
+        string[] podretezec3 = testovaciText.Split(new char[] { ',', '.', '?', '!' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string iterator in podretezec3)
+        {
+            sentences++;
+        }
+        Console.WriteLine(sentences);
+
+        Array.Sort(podretezec);
+        foreach (string iterator in podretezec)
+        {
+            Console.WriteLine(iterator);
+        }
+
+        Console.ReadLine();
+        }
+    
+    }
+    
+}
