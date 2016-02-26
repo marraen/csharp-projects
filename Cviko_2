@@ -58,6 +58,7 @@ namespace @string
         string testovaciText = "Toto je retezec predstavovany nekolika radky,\n" + "ktere jsou od sebe oddeleny znakem LF (Line Feed).\n" + "Je tu i nejaky ten vykricnik! Pro ucely testovani i otaznik?\n" + "Toto je jen zkratka zkr. ale ne konec vety. A toto je\n" + "posledni veta!";
         Console.WriteLine(testovaciText);
 
+        Console.WriteLine("\n \n \n");
 
         int words = 1;
         string[] podretezec = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!'}, StringSplitOptions.RemoveEmptyEntries);
@@ -65,7 +66,7 @@ namespace @string
             {
                 words++;
             }
-        Console.WriteLine(words);
+        Console.WriteLine("pocet slov: " + words);
 
         int lines = 0;
         string[] podretezec2 = testovaciText.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
@@ -73,21 +74,101 @@ namespace @string
             {
                  lines++;
             }
-        Console.WriteLine(lines);
+        Console.WriteLine("pocet radku: " + lines);
 
-        int sentences = 0;
-        string[] podretezec3 = testovaciText.Split(new char[] { ',', '.', '?', '!' }, StringSplitOptions.RemoveEmptyEntries);
+        int sentences = -1;
+        string[] podretezec3 = testovaciText.Split(new char[] { '.', '?', '!' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (string iterator in podretezec3)
         {
             sentences++;
         }
-        Console.WriteLine(sentences);
+        Console.WriteLine("pocet vet: " + sentences);
 
-        Array.Sort(podretezec);
-        foreach (string iterator in podretezec)
+        Console.WriteLine("\n \n \n");
+
+
+        // nejdelsi slovo:
+        string[] podretezec6 = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        int length_l;
+        string largestword = podretezec6[0];
+
+        for (int i = 0; i < podretezec6.Length; i++)
         {
-            Console.WriteLine(iterator);
+            string temp = podretezec6[i];
+            length_l = temp.Length;
+
+            if (largestword.Length < podretezec6[i].Length)
+            {
+                largestword = podretezec6[i];
+            }
         }
+        Console.WriteLine("Nejdelsi slovo je:" + largestword);
+
+        string[] podretezec7 = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        int length_s;
+        string smallestword = podretezec6[0];
+
+        for (int i = 0; i < podretezec6.Length; i++)
+        {
+            string temp = podretezec6[i];
+            length_s = temp.Length;
+
+            if (smallestword.Length > podretezec6[i].Length)
+            {
+                smallestword = podretezec6[i];
+            }
+        }
+        Console.WriteLine("Nejkratsi slovo je:" + smallestword);
+        Console.WriteLine("\n \n \n");
+
+        string[] podretezec4 = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+
+/*
+        string[] getthenejcetnejsi()
+        {
+        Dictionary<string, int > cetnostSlov =new Dictionary<string, int>();
+            string[] slova = GetSlova();
+            foreach (string iterator in slova)
+            {
+                if (cetnostSlov.ContainsKey(iterator))
+                {
+                    cetnostSlov[iterator]++;  
+                }
+                else
+                {
+                    cetnostSlov[iterator]=1;
+                }
+           }
+           int maxCetnost=0;
+           foreach (string iterator in cetnostSlov.Keys)
+           {
+               if(cetnostSlov[iterator]>maxCetnost)
+               {
+                   maxCetnost=cetnostSlov[iterator];
+               }
+
+           }
+        List<string> nejcetnejsiSlova = new List<string>();
+
+           foreach (string iterator in cetnostSlov.Keys)
+           {
+               if (cetnostSlov[iterator] == maxCetnost)
+               {
+                   nejcetnejsiSlova.Add(iterator);
+               }
+        
+           }
+           return nejcetnejsiSlova.ToArray();
+       }
+       Console.WriteLine(getthenejcetnejsi);
+
+*/
+
+
+        string[] podretezec5 = testovaciText.Split(new char[] { ' ', ',', '.', '?', '!', '\n', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        Array.Sort(podretezec5);
+        string novyRet = string.Join(", ",podretezec5);
+        Console.WriteLine("Slova podle abecedy: " + novyRet);
 
         Console.ReadLine();
         }
