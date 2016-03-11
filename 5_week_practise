@@ -28,6 +28,20 @@ namespace cviko_5
             valec.Kresli();
             Jehlan jehlan = new Jehlan(3, 5);
             jehlan.Kresli();
+            
+            GrObjekt[] tvary = new GrObjekt[] { kruh, obdelnik, trojuhelnik, elipsa, kvadr, koule, valec, jehlan };
+            object[] tvary2 = new object[] { kruh, obdelnik, trojuhelnik, elipsa, kvadr, koule, valec, jehlan };
+
+            foreach (GrObjekt a in tvary);
+            if (tvary[0] is Objekt2D)
+            {
+                Console.WriteLine("tvar je 2D");
+            }
+            else
+            {
+                Console.WriteLine("tvar je 3D");
+            }
+            
             Console.ReadLine();
             
         }
