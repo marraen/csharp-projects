@@ -1,0 +1,127 @@
+Program...
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Rezistor souc1 = new Rezistor(2, 100);
+            Rezistor souc2 = new Rezistor(2, 400);
+            kapacitor souc3 = new kapacitor(3, 10.5);
+            kapacitor souc4 = new kapacitor(1, 17.3);
+
+            souc1.vypis();  
+
+            elektronickaSoucastka souc1_t = souc1;
+            elektronickaSoucastka[] soucastky = new elektronickaSoucastka[] { souc1, souc2, souc3, souc4 };
+            object[] soucastky2 = new object[] { souc1, souc2, souc3, souc4 };
+
+            foreach (elektronickaSoucastka = in soucastky);
+            if (soucastky[0] is kapacitor)
+            {
+                Console.writeline("je typ kapacitor");
+            }
+            else
+            {
+                Console.WriteLine("Neni typ kapacitor");
+            }
+        }
+
+        kapacitor souc11=soucastky[0] as kapacitor
+    }
+}
+
+
+
+
+
+elektronickaSoucastka...
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    abstract class elektronickaSoucastka
+    {
+        protected int cena;
+
+        public elektronickaSoucastka(int _cena)
+        {
+            cena = _cena;
+        }
+
+        public abstract virtual void vypis()
+        {
+           // Console.WriteLine("cena[0]", cena);
+        }
+    }
+}
+
+
+kapacitor...
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class kapacitor : elektronickaSoucastka
+    {
+        private double kapacita;
+        public kapacitor(int _cena, double _kapacita)
+            : base(_cena)
+        {
+            kapacita = _kapacita;
+        }
+       
+        public override void vypis
+    }
+}
+
+
+
+
+
+rezistor...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Rezistor : elektronickaSoucastka
+    {
+        double odpor;
+        public Rezistor(int _cena, double _odpor)
+            : base(_cena)
+        {
+            odpor = _odpor;
+        }
+        public override void vypis();
+        {
+            Console.WriteLine(string.FormatException("Odpor0",odpor));
+        }
+    }
+}
+
+
