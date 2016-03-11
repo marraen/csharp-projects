@@ -1,0 +1,368 @@
+Program....
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Program
+     {
+     static void Main(string[] args)
+        {   
+            Kruh kruh = new Kruh(3);
+            kruh.Kresli();
+            Obdelnik obdelnik = new Obdelnik(2, 4);
+            obdelnik.Kresli();
+            Trojuhelnik trojuhelnik = new Trojuhelnik(3, 5);
+            trojuhelnik.Kresli();
+            Elipsa elipsa = new Elipsa(3, 5);
+            elipsa.Kresli();
+            Kvadr kvadr = new Kvadr(3, 5, 7);
+            kvadr.Kresli();
+            Koule koule = new Koule(5);
+            koule.Kresli();
+            Valec valec = new Valec(3, 5);
+            valec.Kresli();
+            Jehlan jehlan = new Jehlan(3, 5);
+            jehlan.Kresli();
+            Console.ReadLine();
+            
+        }
+
+    
+     }
+}  
+
+
+
+
+
+GrObjekt...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    abstract public class GrObjekt
+    {
+    public abstract void Kresli();
+
+    }
+}
+
+
+
+Objekt3D....
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    abstract public class Objekt3D:GrObjekt
+    {
+        public abstract double spoctiPovrch();
+        public abstract double spoctiObjem();
+
+    }
+}
+
+
+Objekt2D...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    abstract public class Objekt2D:GrObjekt
+    {
+     public abstract double spoctiPlochu();
+
+    }
+}
+
+
+Kruh...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Kruh:Objekt2D
+    {
+        private double r;
+        public Kruh (double _r)
+        {
+            r = _r;
+        }
+                
+        public override double spoctiPlochu()
+        {
+            return Math.PI * Math.Pow(r,2);
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Kruh o polomeru:" + r + " ma plochu:" + spoctiPlochu());
+        }
+    }
+}
+
+
+Obdelnik...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Obdelnik:Objekt2D
+    {
+        private double A, B;
+        public Obdelnik (double _A, double _B)
+        {
+            A = _A;
+            B = _B;
+        }
+
+        public override double spoctiPlochu()
+        {
+            return A*B;
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Obdelnik o stranach a: " + A + "a B: " + B + " ma plochu:" + spoctiPlochu());
+        }
+
+    }
+}
+
+
+Trojuhelnik...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Trojuhelnik:Objekt2D
+    {
+        private double A, vA;
+        public Trojuhelnik (double _A, double _vA)
+        {
+            A = _A;
+            vA = _vA;
+        }
+
+        public override double spoctiPlochu()
+        {
+            return A*vA;
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Trojuhelnik o strane A: " + A + "a vysce vA: " + vA + " ma plochu:" + spoctiPlochu());
+        }
+    }
+}
+
+
+Elipsa...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Elipsa:Objekt2D
+    {
+        private double A, B;
+        public Elipsa (double _A, double _B)
+        {
+            A = _A;
+            B = _B;
+        }
+
+        public override double spoctiPlochu()
+        {
+            return A*B*Math.PI;
+        }
+
+        public override void Kresli()
+        {
+             Console.WriteLine("Elipsa o hlavni poloose A:" + A + "a vedlejsi poloose B: " + B + " ma plochu:" + spoctiPlochu());
+        }
+    }
+}
+
+
+Kvadr...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Kvadr:Objekt3D
+    {
+        private double A, B, C;
+        public Kvadr(double _A, double _B, double _C)
+        {
+            A = _A;
+            B = _B;
+            C = _C;
+        }
+
+        public override double spoctiPovrch()
+        {
+            return A * B * 2 + B * C * 2 + A * C * 2;
+        }
+        public override double spoctiObjem()
+        {
+            return A * B * C;
+        }
+        public override void Kresli()
+        {
+            Console.WriteLine("Kvadr o stranach A:" + A + ", B:" + B + ", C: " + C + " ma povrch:" + spoctiPovrch() + " a objem:" + spoctiObjem());
+        }
+    }
+}
+
+
+Koule...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Koule:Objekt3D
+    {
+        private double r;
+        public Koule (double _r)
+        {
+            r = _r;
+        }
+
+        public override double spoctiPovrch()
+        {
+            return 4 * Math.PI * Math.Pow(r, 2);
+        }
+        public override double spoctiObjem()
+        {
+            return 4/3 * Math.PI * Math.Pow(r, 3);
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Koule o polomeru r: " + r + " ma povrch:" + spoctiPovrch() + " a objem:" + spoctiObjem());
+        }
+    }
+}
+
+
+Valec...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Valec:Objekt3D
+    {
+        private double r, v;
+        public Valec (double _v, double _r)
+        {
+            v = _v;
+            r = _r;
+        }
+
+        public override double spoctiPovrch()
+        {
+            return 2 * Math.PI * r * (v+r);
+        }
+        public override double spoctiObjem()
+        {
+            return Math.PI * Math.Pow(r, 2) * v;
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Valec o polomeru podstavy r: " + r + "a vysce v:" + v + " ma povrch:" + spoctiPovrch() + " a objem:" + spoctiObjem());
+        }
+    }
+}
+
+
+Jehlan...
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_5
+{
+    class Jehlan:Objekt3D
+    {
+       private double A, v;
+       public Jehlan(double _A, double _v)
+        {
+            A = _A;
+            v = _v;
+        }
+
+       public override double spoctiPovrch()
+        {
+            return A * A + 2 * (Math.Sqrt(Math.Pow(v, 2) + (Math.Pow(A, 2) / 2))) * (Math.Sqrt(Math.Pow(v, 2) + (Math.Pow(A, 2) / 2)-(Math.Pow(A/2,2))));
+        }
+       public override double spoctiObjem()
+        {
+            return 1/3 * A * A * v;
+        }
+
+        public override void Kresli()
+        {
+            Console.WriteLine("Jehlan o strane podstavy A:" + A + "a vysce v: " + v + "ma povrch:" + spoctiPovrch() + " a objem:" + spoctiObjem());
+        }
+
+    }
+}
