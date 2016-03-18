@@ -1,0 +1,199 @@
+Program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_6
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Kruh kruh = new Kruh(5);
+            Obdelnik obdelnik = new Obdelnik(6);
+            Elipsa elipsa = new Elipsa(3.14);
+            Ctverec ctverec = new Ctverec(4);
+            
+
+
+
+            Console.ReadLine();
+
+        }
+    }
+}
+
+
+I2D.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_6
+{
+
+    public interface I2D
+
+    { }
+}
+
+
+Objekt2D.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_6
+{
+    abstract class Objekt2D : I2D
+    {
+        public abstract double Plocha();
+  
+
+    }
+}
+
+
+
+Extremy.cs // should be ok
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_6
+{
+    class Extremy : I2D
+    {
+        public static T nejvetsi<T>(T[] _pole) where T : IComparable
+        {
+            if (_pole.Length == 0)
+                throw new Exception("Prazdne pole");
+
+            T max = _pole[0];
+            foreach (T it in _pole)
+            {
+
+                if (it.CompareTo(max) > 0)
+
+                    max = it;
+
+            }
+            return max;
+
+        
+
+        }
+
+        public static T nejmensi<T>(T[] _pole) where T : IComparable
+        {
+            if (_pole.Length == 0)
+                throw new Exception("Prazdne pole");
+
+            T min = _pole[0];
+            foreach (T it in _pole)
+            {
+
+                if (it.CompareTo(min) > 0)
+
+                    min = it;
+
+            }
+            return min;
+
+
+        }
+
+
+
+    }
+}
+
+
+Tvary.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cviko_6
+{
+    class Kruh : Objekt2D
+    {
+        private double S; //plocha
+        public Kruh(double _S)
+        {
+            S = _S;
+
+            Console.WriteLine("Plocha kruhu je " + S);
+        }
+
+       
+        
+    }
+
+    class Obdelnik : IComparable
+    {
+        private double S; //plocha
+        public Obdelnik(double _S)
+        {
+            S = _S;
+
+            Console.WriteLine("Plocha obdelniku je " + S);
+        }
+                
+    }
+
+    class Elipsa : IComparable
+    {
+        private double S; //plocha
+        public Elipsa(double _S)
+        {
+            S = _S;
+
+            Console.WriteLine("Plocha elipsy je " + S);
+        }
+
+        
+    }
+
+    class Trojuhelnik : IComparable
+    {
+        private double S; //plocha
+        public Trojuhelnik(double _S)
+        {
+            S = _S;
+
+            Console.WriteLine("Plocha trojuhelniku je " + S);
+        }
+
+       
+    }
+
+    class Ctverec : IComparable
+    {
+        private double S; //plocha
+        public Ctverec(double _S)
+        {
+            S = _S;
+
+            Console.WriteLine("Plocha ctverce je " + S);
+        }
+   
+
+    
+    }
+}
