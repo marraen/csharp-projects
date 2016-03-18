@@ -54,10 +54,12 @@ using System.Threading.Tasks;
 
 namespace cviko_6
 {
-    abstract class Objekt2D : I2D
+    abstract class Objekt2D : I2D, IComparable
     {
         public abstract double Plocha();
-  
+
+        Kruh CompareTo(Obdelnik S);
+        
 
     }
 }
@@ -133,19 +135,20 @@ namespace cviko_6
 {
     class Kruh : Objekt2D
     {
-        private double S; //plocha
+        private double S;
         public Kruh(double _S)
         {
             S = _S;
 
             Console.WriteLine("Plocha kruhu je " + S);
         }
-
-       
-        
+        public override double Plocha()
+        {
+            return S;
+        }
     }
 
-    class Obdelnik : IComparable
+    class Obdelnik : Objekt2D
     {
         private double S; //plocha
         public Obdelnik(double _S)
@@ -154,10 +157,14 @@ namespace cviko_6
 
             Console.WriteLine("Plocha obdelniku je " + S);
         }
+        public override double Plocha()
+        {
+            return S;
+        }
                 
     }
 
-    class Elipsa : IComparable
+    class Elipsa : Objekt2D
     {
         private double S; //plocha
         public Elipsa(double _S)
@@ -166,11 +173,15 @@ namespace cviko_6
 
             Console.WriteLine("Plocha elipsy je " + S);
         }
+        public override double Plocha()
+        {
+            return S;
+        }
 
         
     }
 
-    class Trojuhelnik : IComparable
+    class Trojuhelnik : Objekt2D
     {
         private double S; //plocha
         public Trojuhelnik(double _S)
@@ -179,11 +190,15 @@ namespace cviko_6
 
             Console.WriteLine("Plocha trojuhelniku je " + S);
         }
+        public override double Plocha()
+        {
+            return S;
+        }
 
        
     }
 
-    class Ctverec : IComparable
+    class Ctverec : Objekt2D
     {
         private double S; //plocha
         public Ctverec(double _S)
@@ -192,8 +207,13 @@ namespace cviko_6
 
             Console.WriteLine("Plocha ctverce je " + S);
         }
+        public override double Plocha()
+        {
+            return S;
+        }
    
 
     
     }
 }
+
