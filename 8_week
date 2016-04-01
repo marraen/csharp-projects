@@ -196,3 +196,39 @@ namespace _8_week
         }
     }
 }
+
+
+// classa ArchivTeplot
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _8_week
+{
+    class ArchivTeplot
+    {
+
+        SortedDictionary<int, RocniTeplota> _archiv = new SortedDictionary<int, RocniTeplota>();
+
+        void Load()
+        {
+            //StreamReader reader
+
+
+        }
+
+        void Write()
+        {
+            //StreamWriter writer
+            foreach (RocniTeplota a in _archiv.Values)
+            {
+                List<double> mes = a.MesicniTeploty;
+
+                //string radek = rok: leden; unor;...
+            }
+        }
+    }
+}
