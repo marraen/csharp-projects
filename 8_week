@@ -1,3 +1,6 @@
+//theory
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,3 +63,131 @@ namespace _8_week
     }
 }
 
+
+
+// exercise
+
+// class RocniTeplota
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _8_week
+{
+    class RocniTeplota
+    {
+        public List<double> MesicniTeploty { get; set; }
+        public int rok {get; set;}
+        
+        public double maxTeplota
+        {
+            get 
+            {
+                return MesicniTeploty.Max();
+            }
+        }
+        
+        public double MinTeplota
+        {
+            get
+            {
+                return MesicniTeploty.Min();
+            }
+        }
+
+        public double PrumernaTeplota
+        {
+            get
+            {
+                return MesicniTeploty.Average();            
+            }
+        }
+
+
+
+        /*
+        private int rok;
+        private double[] mesicniTeploty;
+
+        public void getRok(int Rok)
+        {
+            rok = Rok;
+        }
+        public void getMesicniTeploty(double[] MesicniTeploty)
+        {
+            mesicniTeploty = MesicniTeploty;
+        }
+
+
+        
+
+        protected double MaxTeplota(double teplota)
+        {
+            double maxTeplota = 100                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ;
+
+            if (teplota > maxTeplota)
+            {
+                maxTeplota = teplota;
+            }
+            return maxTeplota;
+        }
+
+        protected double MinTeplota(double teplota)
+        {
+            double minTeplota = 0;
+
+            if (teplota > minTeplota)
+            {
+                minTeplota = teplota;
+            }
+            return minTeplota;
+        }
+
+        protected double PrumerTeplota(double teplota)
+        {
+            double prumerTeplota = 0;
+
+            if (teplota > prumerTeplota)
+            {
+                prumerTeplota = teplota;
+            }
+            return prumerTeplota;
+        }
+         */ 
+    }
+}
+
+
+//Programm
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace _8_week
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            RocniTeplota.MesicniTeploty = 15;
+            MesicniTeploty.Add(19.5);
+
+
+
+            /*
+            RocniTeplota temp = new RocniTeplota();
+            temp.getRok(2000);
+            temp.getMesicniTeploty(20, 10);
+            */
+
+            Console.ReadLine();
+
+        }
+    }
+}
