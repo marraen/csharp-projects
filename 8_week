@@ -175,8 +175,13 @@ namespace _8_week
     {
         static void Main(string[] args)
         {
-            RocniTeplota.MesicniTeploty = 15;
-            MesicniTeploty.Add(19.5);
+            RocniTeplota rok1 = new RocniTeplota();
+
+            rok1.MesicniTeploty = new List<double> { 15, 16, 19.5, 32, 25, 22.7 };
+            rok1.rok = 1990;
+
+            Console.WriteLine(rok1.maxTeplota);
+            Console.WriteLine(rok1.PrumernaTeplota);
 
 
 
