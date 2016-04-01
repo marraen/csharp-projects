@@ -214,7 +214,7 @@ namespace _8_week
         SortedDictionary<int, RocniTeplota> _archiv = new SortedDictionary<int, RocniTeplota>();
 
         void Load()
-      {
+     {
             _archiv.Clear();
             StreamReader reader = File.OpenText(_jmenoSouboru);
             string radek = null;
@@ -234,10 +234,13 @@ namespace _8_week
                         {
                             mesTep1.Add(Convert.ToDouble(c));
                         }
+
+                        novyRok.MesicniTeploty = mesTep1;
+                        _archiv[novyRok.rok] = novyRok;
                     }
                 }
             }
-
+            reader.Close();
         }
 
         void Write()
