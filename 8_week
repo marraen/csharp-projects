@@ -214,9 +214,29 @@ namespace _8_week
         SortedDictionary<int, RocniTeplota> _archiv = new SortedDictionary<int, RocniTeplota>();
 
         void Load()
-        {
-            //StreamReader reader
+      {
+            _archiv.Clear();
+            StreamReader reader = File.OpenText(_jmenoSouboru);
+            string radek = null;
 
+            while ((radek = reader.ReadLine()) != null)
+            {
+                string [] sep1 = radek.Split(':');
+                if (sep1.Length == 2)
+                {
+                    RocniTeplota novyRok = new RocniTeplota();
+                    novyRok.rok = Convert.ToInt32(sep1[0]);
+                    string [] sep2 = sep1[1].Split(';');
+                    if (sep2.Length == 12)
+                    {
+                        List<double> mesTep1 = new List<double>();
+                        foreach (string c in sep2)
+                        {
+                            mesTep1.Add(Convert.ToDouble(c));
+                        }
+                    }
+                }
+            }
 
         }
 
