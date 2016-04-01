@@ -45,12 +45,18 @@ namespace _8_week
             }
             writer.Close();
 
-            if (File.Exists(soubr))
+            if (File.Exists(soubor))
             {
-                StreamReader reader = File.OpenText;
+                StreamReader reader = File.OpenText(soubor);
+                string radek = null;
+                while((radek = reader.ReadLine()) != null)
+                {
+                    Console.WriteLine(radek);
+                }
             }
             Console.ReadLine();
 
         }
     }
 }
+
