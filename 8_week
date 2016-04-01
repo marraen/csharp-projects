@@ -226,7 +226,7 @@ namespace _8_week
                 {
                     RocniTeplota novyRok = new RocniTeplota();
                     novyRok.rok = Convert.ToInt32(sep1[0]);
-                    string [] sep2 = sep1[1].Split(';');
+                    string [] sep2 = sep1[1].Split(new char[]{';'}, StringSplitOptions.RemoveEmptyEntries);
                     if (sep2.Length == 12)
                     {
                         List<double> mesTep1 = new List<double>();
