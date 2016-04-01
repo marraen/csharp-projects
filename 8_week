@@ -68,7 +68,6 @@ namespace _8_week
 // exercise
 
 // class RocniTeplota
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +81,7 @@ namespace _8_week
         public List<double> MesicniTeploty { get; set; }
         public int rok {get; set;}
         
-        public double maxTeplota
+        public double MaxTeplota
         {
             get 
             {
@@ -161,6 +160,7 @@ namespace _8_week
 }
 
 
+
 //Programm
 using System;
 using System.Collections.Generic;
@@ -180,10 +180,15 @@ namespace _8_week
             rok1.MesicniTeploty = new List<double> { 15, 16, 19.5, 32, 25, 22.7 };
             rok1.rok = 1990;
 
-            Console.WriteLine(rok1.maxTeplota);
-            Console.WriteLine(rok1.PrumernaTeplota);
+            Console.WriteLine("Maximalni teplota za evidovane roky byla: " + rok1.MaxTeplota);
+            Console.WriteLine("Prumerna teplota za evidovane roky byla: " + rok1.PrumernaTeplota);
+            Console.WriteLine("Minimalni teplota za evidovane roky byla: " + rok1.MinTeplota);
+            Console.WriteLine("------------------------");
 
+            ArchivTeplot zapis = new ArchivTeplot();
+            zapis.Write();
 
+            
 
             /*
             RocniTeplota temp = new RocniTeplota();
@@ -198,6 +203,7 @@ namespace _8_week
 }
 
 
+
 // classa ArchivTeplot
 
 using System;
@@ -205,6 +211,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace _8_week
 {
@@ -213,8 +220,10 @@ namespace _8_week
 
         SortedDictionary<int, RocniTeplota> _archiv = new SortedDictionary<int, RocniTeplota>();
 
-        void Load()
-     {
+
+
+        public void Load(string _jmenoSouboru)
+        {
             _archiv.Clear();
             StreamReader reader = File.OpenText(_jmenoSouboru);
             string radek = null;
@@ -243,15 +252,23 @@ namespace _8_week
             reader.Close();
         }
 
-        void Write()
+        public void Write()
         {
-            //StreamWriter writer
+            string radek = "2011: 25; 36; 21; 12; 12.6; 30; 26.5; 18,9; 12,3; 20; 19.2; 18.2";
+            Console.WriteLine(radek);
+
+            string[] teploty = radek.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine(teploty);
+
+            string _jmenoSouboru = @"d:\ArchivTeplot.txt";
+            StreamWriter writer = File.CreateText(_jmenoSouboru);
+            
             foreach (RocniTeplota a in _archiv.Values)
             {
-                List<double> mes = a.MesicniTeploty;
-
-                //string radek = rok: leden; unor;...
+                writer.WriteLine(radek);
             }
+            writer.Close();
+
         }
     }
 }
