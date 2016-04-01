@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace _8_week
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            dic[10] = 5;
+            dic[8] = 2;
+
+            foreach (int a in dic.Values)
+            {
+                Console.WriteLine(a);
+            }
+            
+            SortedDictionary<int, int> sDic = new SortedDictionary<int, int>();
+            sDic[10] = 5;
+            sDic[8] = 2;
+
+            foreach (int a in sDic.Values)
+            {
+                Console.WriteLine(a);
+            }
+
+            List<int> mujList = new List<int>();
+            mujList.Add(5);
+            mujList.Add(7);
+            mujList.Add(9);
+
+            Console.WriteLine(mujList.IndexOf(7));
+            //mujList.
+
+            string soubor = @"d:\mujSoubor.txt";
+            StreamWriter writer = File.CreateText(soubor);
+            foreach (int a in sDic.Values)
+            {
+                writer.WriteLine(a);
+            }
+            writer.Close();
+
+            if (File.Exists(soubr))
+            {
+                StreamReader reader = File.OpenText;
+            }
+            Console.ReadLine();
+
+        }
+    }
+}
