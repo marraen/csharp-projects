@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WpfApplication1
+{
+    class Calculator
+    {
+        public Calculator()
+        {
+            Display = "0";
+
+            _stav = Stav._prvniCislo;
+        }
+
+        double spoctiCislo(double _cislo1, double _cislo2, char operand)
+        {
+            switch(operand)
+            {
+                case '+':
+                    return _cislo1 + _cislo2;
+                case '-':
+                    return _cislo1 - _cislo2;
+                case '*':
+                    return _cislo1 * _cislo2;
+                case '/':
+                    return _cislo1 / _cislo2;
+                default:
+                    return 0;
+            
+            
+            }
+        
+        
+        }
+
+        private enum Stav
+        {
+            _prvniCislo,
+            operand,
+            _druheCislo,
+            vysledek
+        };
+
+        Stav _stav;
+        
+        string _prvniCislo;
+        string _druheCislo;
+        char operand;
+        
+        
+        /*
+        private double spoctiCislo(double prvni, double druhe, double operace)
+        {
+            double vysledek;
+            vysledek = prvni;
+            return vysledek;
+        }
+        */
+
+        public string Display
+        {
+            get{
+                switch(_stav)
+                {
+                    case Stav._prvniCislo:
+                        return _prvniCislo;
+                    case Stav.operand:
+                    case Stav._druheCislo:
+                        return _druheCislo;
+                    case Stav.vysledek:
+                        return spoctiCislo(Convert.ToDouble(_prvniCislo),Convert.ToDouble(_druheCislo),operand).toString();
+                    default:
+                        return "0";
+
+               }
+            }
+
+            private set;
+        
+        }
+        
+
+
+
+
+
+
+
+
+    
+           
+    }
+}
