@@ -45,3 +45,10 @@ SELECT Studenti.Id, Studenti.Prijmeni, Predmety.Predmet FROM Studenti LEFT JOIN 
 
 SELECT Studenti.Prijmeni, COUNT(Studenti.Id) as Pocet
 FROM Studenti GROUP BY Studenti.Prijmeni ORDER BY Pocet DESC
+
+SELECT KdoKam.ShortCut, COUNT(KdoKam.ID) as Pocet
+FROM KdoKam LEFT JOIN Predmety ON KdoKam.ShortCut = Predmety.ShortCut GROUP BY KdoKam.ShortCut HAVING COUNT(KdoKam.ID)<3
+
+SELECT Predmety.ShortCut FROM Predmety
+
+SELECT Hodnocení.znamka FROM Hodnocení
