@@ -1,0 +1,1 @@
+SELECT Studenti.Id, Studenti.Prijmeni, Predmety.Predmet FROM Studenti LEFT JOIN KdoKam ON Studenti.Id = KdoKam.ID LEFT JOIN Predmety ON KdoKam.ShortCut = Predmety.ShortCut
