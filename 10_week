@@ -1,1 +1,47 @@
+CREATE TABLE Predmety(ShortCut varchar, Predmet nvarchar(30))
+
+INSERT INTO Predmety(ShortCut,Predmet) VALUES ('BOOP', 'Objektově Orientované Programování');
+INSERT INTO Predmety(ShortCut,Predmet) VALUES ('BCZS', 'Číslicové zpracování signálů');
+INSERT INTO Predmety(ShortCut,Predmet) VALUES ('BELA', 'Elektroakustika v elektrotechnice');
+
+
+CREATE TABLE Studenti(Id int, Jmeno nvarchar(30), Prijmeni nvarchar(30))
+
+INSERT INTO Studenti (Id,Jmeno,Prijmeni,DatumNarozeni) VALUES ('174440','Petr', 'Bača','16.6.1995');
+INSERT INTO Studenti (Id,Jmeno,Prijmeni,DatumNarozeni) VALUES ('174445','Zuzana', 'Čapandová','14.1.1995');
+INSERT INTO Studenti (Id,Jmeno,Prijmeni,DatumNarozeni) VALUES ('174264','Jakub', 'Bajzík','20.1.1995');
+INSERT INTO Studenti (Id,Jmeno,Prijmeni,DatumNarozeni) VALUES ('174459','Vojtěch', 'Kryška', '20.7.1995');
+
+
+CREATE TABLE Hodnocení(ID varchar(6),ShortCut varchar(4), datum varchar(20), znamka varchar(1))
+
+INSERT INTO Hodnocení(ID,ShortCut,datum,znamka) VALUES ('174440','BOOP', '15.4.2016','A');
+INSERT INTO Hodnocení(ID,ShortCut,datum,znamka) VALUES ('174445','BOOP', '15.4.2016','A');
+INSERT INTO Hodnocení(ID,ShortCut,datum,znamka) VALUES ('174264','BOOP', '15.4.2016','A');
+INSERT INTO Hodnocení(ID,ShortCut,datum,znamka) VALUES ('174459','BOOP', '15.4.2016', 'C');
+
+
+CREATE TABLE KdoKam(ID varchar(6),ShortCut varchar(4))
+
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174440','BOOP');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174440','BCZS');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174440','BELA');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174445','BOOP');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174445','BELA');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174264','BOOP');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174264','BCZS');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174264','BELA');
+INSERT INTO KdoKam(ID,ShortCut) VALUES ('174459','BOOP');
+
+
+SELECT * FROM Predmety
+
+SELECT COUNT(ShortCut) as PocetNabizenychPredmetu FROM Predmety
+
+SELECT * FROM  Studenti LEFT JOIN Predmety ON Studenti.Id = Predmety.ShortCut
+
+
 SELECT Studenti.Id, Studenti.Prijmeni, Predmety.Predmet FROM Studenti LEFT JOIN KdoKam ON Studenti.Id = KdoKam.ID LEFT JOIN Predmety ON KdoKam.ShortCut = Predmety.ShortCut
+
+SELECT Studenti.Prijmeni, COUNT(Studenti.Id) as Pocet
+FROM Studenti GROUP BY Studenti.Prijmeni ORDER BY Pocet DESC
