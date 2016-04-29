@@ -159,3 +159,34 @@ namespace Calculator
         </li>
     </ol>
 </asp:Content>
+
+
+// pri spravnych referencich WCF service
+
+private int soucet(string a, string b)
+        {
+            ServiceReference1.Service1Client sluzba = new ServiceReference1.Service1Client();
+            return sluzba.soucet(a, b);
+
+        }
+
+        private int rozdil(string a, string b)
+        {
+            ServiceReference1.Service1Client sluzba = new ServiceReference1.Service1Client();
+            return sluzba.rozdil(a, b);
+
+        }
+
+        private int nasobeni(string a, string b)
+        {
+            ServiceReference1.Service1Client sluzba = new ServiceReference1.Service1Client();
+            return sluzba.nasobeni(a, b);
+
+        }
+
+        private double deleni(string a, string b)
+        {
+            ServiceReference1.Service1Client sluzba = new ServiceReference1.Service1Client();
+            return sluzba.deleni(a, b);
+
+        }
