@@ -1,0 +1,271 @@
+// WPF application for vocabulary testing... .mdf database, DataClasses for connection
+
+// MainWindow.xaml.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data.SqlServerCe;
+using System.Data.Linq;
+
+namespace Pokus2
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    
+    public partial class MainWindow : Window
+    {
+        Slovnik slovnik = new Slovnik();
+        Slovo aktSlovo;
+        public MainWindow()
+        {
+            InitializeComponent();
+            slovnik.add("hammer", "kladivo");
+            /*slovnik.add("computer", "počítač");
+            slovnik.add("headphones", "sluchátka");
+            slovnik.add("mouse", "myš");*/
+        }
+
+        private void solve_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (String.Equals(cz.Text, aktSlovo.Česky))
+            {
+                result.Content = "Správně!";
+                slovnik.uspech(aktSlovo, true);
+            }
+            else 
+            { 
+                result.Content = "Bohužel...";
+                slovnik.uspech(aktSlovo, false);
+            }
+            spravne.Content = slovnik.statistikaAno().ToString();
+            spatne.Content = slovnik.statistikaNe().ToString();
+            double uspechSlova = 100*(Convert.ToDouble(aktSlovo.Správně) / (Convert.ToDouble(aktSlovo.Správně) + Convert.ToDouble(aktSlovo.Špatně)));
+            test.Content = uspechSlova + "%";
+
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            aktSlovo = slovnik.read();
+            eng.Content = aktSlovo.Anglicky;
+            result.Content = null;
+            cz.Text = null;
+            test.Content = null;
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            slovnik.add(engAdd.Text, czAdd.Text);
+            czAdd.Text = null;
+            engAdd.Text = null;
+        }
+
+        private void solve2_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.Equals(eng2.Text, aktSlovo.Anglicky))
+            {
+                result2.Content = "Správně!";
+                slovnik.uspech(aktSlovo, true);
+            }
+            else
+            {
+                result2.Content = "Bohužel...";
+                slovnik.uspech(aktSlovo, false);
+            }
+            spravne2.Content = slovnik.statistikaAno().ToString();
+            spatne2.Content = slovnik.statistikaNe().ToString();
+            double uspechSlova = 100 * (Convert.ToDouble(aktSlovo.Správně) / (Convert.ToDouble(aktSlovo.Správně) + Convert.ToDouble(aktSlovo.Špatně)));
+            test2.Content = uspechSlova + "%";
+        }
+
+        private void next2_Click(object sender, RoutedEventArgs e)
+        {
+            aktSlovo = slovnik.read();
+            cz2.Content = aktSlovo.Česky;
+            result2.Content = null;
+            eng2.Text = null;
+            test2.Content = null;
+        }
+
+
+
+
+    }
+}
+
+
+// Slovnik.cs (class for work with data from database)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Pokus2
+{
+    class Slovnik
+    {
+        int lastID = 0;
+        DataClasses1DataContext data = new DataClasses1DataContext();
+
+        public void add(string eng, string cze)
+        {
+            Slovo noveSlovo = new Slovo() { Anglicky = eng, Česky = cze,Správně=0,Špatně=0 };
+            data.Slovos.InsertOnSubmit(noveSlovo);
+            data.SubmitChanges();        
+        }
+
+        public Slovo read()
+        {
+            Random rnd = new Random();
+            int a = 0;
+            foreach (Slovo akt in data.Slovos)
+            { 
+                a = akt.Id;
+            }
+
+            lastID = rnd.Next(1, a+1);
+
+            foreach (Slovo vypisSlovo in data.Slovos)
+            {
+                if (vypisSlovo.Id == lastID)
+                    return vypisSlovo;
+            }
+            return null;
+        }
+
+        public void uspech(Slovo zkSlovo, bool spravnost)
+        {
+            foreach (Slovo akt in data.Slovos)
+            {
+                if (akt.Id == zkSlovo.Id)
+                {
+                    if (spravnost == true)
+                    {
+                        akt.Správně++;
+                    }
+
+                    if (spravnost == false)
+                    {
+                        akt.Špatně++;
+                    }
+                }
+                
+            
+            }
+
+        }
+        public int statistikaAno()
+        {
+            int stat = 0;
+            foreach (Slovo akt in data.Slovos)
+            {
+                stat += Convert.ToInt16(akt.Správně);
+            }
+            return stat;
+        }
+
+        public int statistikaNe()
+        {
+            int stat = 0;
+            foreach (Slovo akt in data.Slovos)
+            {
+                stat += Convert.ToInt16(akt.Špatně);
+            }
+            return stat;
+        }
+    }
+}
+
+
+// GUI
+
+<Window x:Class="Pokus2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="300" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
+            <TabItem Header="eng&gt;cze" Height="23" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="solve" Content="Vyhodnoť" HorizontalAlignment="Left" Margin="290,139,0,0" VerticalAlignment="Top" Width="75" Click="solve_Click"/>
+                    <TextBox x:Name="cz" HorizontalAlignment="Left" Height="23" Margin="290,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Anglicky" HorizontalAlignment="Left" Margin="55,65,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Česky" HorizontalAlignment="Left" Margin="290,65,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="next" Content="Další" HorizontalAlignment="Left" Margin="402,233,0,0" VerticalAlignment="Top" Width="75" Click="next_Click"/>
+                    <Label x:Name="spravne" Content="" HorizontalAlignment="Left" Margin="20,196,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="spatne" Content="" HorizontalAlignment="Left" Margin="116,196,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="result" Content="" HorizontalAlignment="Left" Margin="290,165,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label Content="Správných" HorizontalAlignment="Left" Margin="20,165,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Špatných" HorizontalAlignment="Left" Margin="116,165,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="test" Content="" HorizontalAlignment="Left" Margin="58,30,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Statistika pro tento pokus" HorizontalAlignment="Left" Margin="20,139,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Úspěšnost aktuálního slova" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="eng" Content="" HorizontalAlignment="Left" Margin="58,96,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Admin" Margin="374,0,-378,-3">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="czAdd" HorizontalAlignment="Left" Height="23" Margin="230,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Přidej nové slovo" HorizontalAlignment="Left" Margin="41,51,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="engAdd" HorizontalAlignment="Left" Height="23" Margin="230,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Česky" HorizontalAlignment="Left" Margin="230,45,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Anglicky" HorizontalAlignment="Left" Margin="233,112,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="Add" Content="Přidej" HorizontalAlignment="Left" Margin="233,186,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="cze&gt;eng" Height="23" VerticalAlignment="Top" Margin="-48,0,48,0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Úspěšnost aktuálního slova" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Grid.Column="3" Width="155" Height="26"/>
+                    <Label Content="Česky" Grid.Column="3" HorizontalAlignment="Left" Margin="55,65,0,0" VerticalAlignment="Top" Width="97" Height="26"/>
+                    <Label Content="Anglicky" Grid.Column="3" HorizontalAlignment="Left" Margin="290,65,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
+                    <Label x:Name="cz2" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="55,96,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="test2" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="55,36,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="eng2" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="290,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Statistika pro tento pokus" Grid.Column="3" HorizontalAlignment="Left" Margin="20,139,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Správných" Grid.Column="3" HorizontalAlignment="Left" Margin="20,165,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Špatných" Grid.Column="3" HorizontalAlignment="Left" Margin="116,165,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="spravne2" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="20,196,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="spatne2" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="116,196,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="solve2" Content="Vyhodnoť" Grid.Column="3" HorizontalAlignment="Left" Margin="290,139,0,0" VerticalAlignment="Top" Width="75" Click="solve2_Click"/>
+                    <Button x:Name="next2" Content="Další" Grid.Column="3" HorizontalAlignment="Left" Margin="402,233,0,0" VerticalAlignment="Top" Width="75" Click="next2_Click"/>
+                    <Label x:Name="result2" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="290,166,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+
+// .mdf database table
+
+CREATE TABLE [dbo].[Slovo] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [Česky]    NVARCHAR (50) NULL,
+    [Anglicky] NVARCHAR (50) NULL,
+    [Správně]  INT           NULL,
+    [Špatně]   INT           NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
